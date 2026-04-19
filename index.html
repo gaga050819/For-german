@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Берлін — місто, що не спить</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0e0e0e;
+  --surface:  #181818;
+  --card:     #212121;
+  --text:     #f0ede8;
+  --muted:    rgba(240,237,232,0.4);
+  --border:   rgba(240,237,232,0.09);
+  --red:      #cc1f26;
+  --red-dim:  rgba(204,31,38,0.15);
+}
+[data-theme="light"] {
+  --bg:       #f4f1ec;
+  --surface:  #eae7e0;
+  --card:     #ffffff;
+  --text:     #14100e;
+  --muted:    rgba(20,16,14,0.45);
+  --border:   rgba(20,16,14,0.1);
+  --red:      #b8191f;
+  --red-dim:  rgba(184,25,31,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.35s, color 0.35s;
+}
+
+.serif { font-family: 'Playfair Display', serif; }
+.mono  { font-family: 'DM Mono', monospace; }
+
+#viewport {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+#viewport::-webkit-scrollbar { width: 3px; }
+#viewport::-webkit-scrollbar-track { background: transparent; }
+#viewport::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+}
+
+#hdr {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 24px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.35s, border-color 0.35s;
+}
+
+#hdr .logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 18px; font-weight: 700; letter-spacing: -0.03em;
+  color: var(--text); text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  flex-shrink: 0;
+}
+
+#dots {
+  display: flex; gap: 6px; align-items: center; flex: 1; justify-content: center;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted); cursor: pointer;
+  border: none; transition: all 0.25s;
+}
+.dot.on { background: var(--red); transform: scale(1.5); }
+
+#hdr-right {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+
+.btn-sm {
+  height: 36px; padding: 0 16px;
+  border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-sm:hover { border-color: var(--red); }
+
+.btn-primary {
+  background: var(--red); border-color: var(--red); color: #fff;
+}
+.btn-primary:hover { background: #e02027; border-color: #e02027; }
+
+#slide-count {
+  font-family: 'DM Mono', monospace; font-size: 13px;
+  color: var(--muted); min-width: 36px; text-align: center;
+}
+#slide-count strong { color: var(--red); }
+
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px;
+}
+
+.h-xl { font-family: 'Playfair Display', serif; font-weight: 900;
+        font-size: clamp(4rem, 9vw, 8rem); line-height: 0.88; letter-spacing: -0.02em; }
+.h-lg { font-family: 'Playfair Display', serif; font-weight: 900;
+        font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 0.92; letter-spacing: -0.02em; }
+.h-md { font-family: 'Playfair Display', serif; font-weight: 700;
+        font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; }
+
+.max-w { max-width: 1200px; margin-inline: auto; padding-inline: 40px; width: 100%; }
+@media(max-width:600px) { .max-w { padding-inline: 20px; } }
+
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  transition: background 0.35s, border-color 0.35s;
+}
+
+#s1 {
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+#s1::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(180,20,26,0.18), transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  padding-top: 80px; padding-bottom: 60px;
+}
+@media(max-width:900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-img-wrap { display: none; }
+}
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  margin-top: 32px;
+  font-size: 13px; color: var(--muted);
+}
+.hero-cta {
+  display: flex; align-items: center; gap: 12px; margin-top: 40px;
+}
+.btn-lg {
+  height: 52px; padding: 0 32px;
+  border-radius: 10px; border: none;
+  background: var(--text); color: var(--bg);
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+  cursor: pointer; transition: opacity 0.2s, transform 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-lg:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-confetti {
+  height: 52px; padding: 0 24px;
+  border-radius: 10px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  cursor: pointer; transition: color 0.2s, border-color 0.2s;
+}
+.btn-confetti:hover { color: var(--text); border-color: var(--text); }
+
+.hero-img-wrap {
+  position: relative;
+}
+.hero-img {
+  width: 100%; aspect-ratio: 3/4; max-height: 520px;
+  border-radius: 16px; overflow: hidden; position: relative;
+}
+.hero-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.hero-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+}
+.hero-img-caption {
+  position: absolute; bottom: 24px; left: 24px; right: 24px; color: #fff;
+}
+.hero-img-caption .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 6px;
+}
+.hero-img-badge {
+  position: absolute; top: 16px; right: 16px;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+  color: #fff; font-size: 11px; padding: 6px 12px; border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+}
+.ping {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80; position: relative;
+}
+.ping::after {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 50%; background: rgba(74,222,128,0.4);
+  animation: ping 1.4s ease-out infinite;
+}
+@keyframes ping {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: var(--muted);
+}
+.scroll-mouse {
+  width: 24px; height: 36px;
+  border: 1.5px solid var(--muted); border-radius: 12px;
+  display: flex; justify-content: center; padding-top: 6px;
+}
+.scroll-wheel {
+  width: 3px; height: 6px;
+  background: var(--muted); border-radius: 2px;
+  animation: scroll-bounce 1.6s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+#s2 { background: var(--surface); }
+.tl-item {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tl-item:hover { background: var(--card); }
+.tl-header {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 0;
+}
+.tl-year {
+  font-family: 'DM Mono', monospace; font-size: 13px;
+  color: var(--red); width: 40px; flex-shrink: 0;
+}
+.tl-icon { font-size: 20px; flex-shrink: 0; }
+.tl-title {
+  flex: 1; font-size: 17px; font-weight: 500; color: var(--text);
+}
+.tl-arrow {
+  color: var(--muted); font-size: 20px; flex-shrink: 0;
+  transition: transform 0.3s; font-family: 'DM Mono', monospace;
+  line-height: 1;
+}
+.tl-arrow.open { transform: rotate(45deg); color: var(--red); }
+.tl-detail {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  font-size: 15px; color: var(--muted); line-height: 1.65;
+  padding-left: 80px;
+}
+.tl-detail.open {
+  max-height: 120px;
+  padding-bottom: 18px;
+}
+
+#s3 { background: var(--bg); }
+.landmark-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media(max-width:900px) { .landmark-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:500px) { .landmark-grid { grid-template-columns: 1fr; } }
+
+.lm-card {
+  border-radius: 12px; overflow: hidden; cursor: pointer;
+  background: var(--card); border: 1px solid var(--border);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.lm-card:hover { transform: translateY(-5px); border-color: var(--red); }
+.lm-img { height: 180px; background-size: cover; background-position: center; }
+.lm-info { padding: 16px 18px; }
+.lm-info h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.lm-info p  { font-size: 13px; color: var(--muted); }
+
+#s4 { background: var(--surface); }
+.culture-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: start;
+}
+@media(max-width:860px) { .culture-grid { grid-template-columns: 1fr; } }
+
+.culture-list { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+.culture-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--border);
+}
+.culture-row .ico { font-size: 24px; flex-shrink: 0; }
+.culture-row .info strong { display: block; font-size: 15px; font-weight: 500; color: var(--text); }
+.culture-row .info span   { font-size: 13px; color: var(--muted); }
+
+.quote-box {
+  padding: 36px; border-radius: 16px;
+  background: var(--bg); border: 1px solid var(--border);
+  position: relative;
+}
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px; line-height: 1; color: var(--red);
+  opacity: 0.2; position: absolute; top: 12px; left: 28px;
+}
+#quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-style: italic; line-height: 1.55; color: var(--text);
+  margin-top: 40px; min-height: 120px;
+}
+#quote-author { margin-top: 20px; font-size: 13px; color: var(--muted); }
+.btn-quote {
+  margin-top: 24px; background: none; border: none;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--red); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-quote:hover { opacity: 0.8; }
+
+#s5 { background: var(--bg); }
+.food-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 860px; margin: 0 auto;
+}
+@media(max-width:700px) { .food-grid { grid-template-columns: 1fr; } }
+
+.food-card {
+  border-radius: 16px; padding: 32px 24px; text-align: center;
+  background: var(--card); border: 1px solid var(--border);
+  cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+}
+.food-card:hover { border-color: var(--red); }
+.food-card:nth-child(2) { margin-top: 28px; }
+.food-card:nth-child(2):hover { transform: scale(1.03); }
+.food-card:nth-child(1):hover { transform: rotate(-2deg); }
+.food-card:nth-child(3):hover { transform: rotate(2deg); }
+.food-emoji { font-size: 52px; margin-bottom: 16px; }
+.food-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.food-tag  { font-size: 12px; color: var(--red); font-family: 'DM Mono', monospace; }
+.food-desc { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+
+#food-reveal {
+  max-width: 640px; margin: 28px auto 0;
+  padding: 24px 28px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  display: none; gap: 16px; align-items: flex-start;
+}
+#food-reveal .f-emoji { font-size: 36px; flex-shrink: 0; }
+#food-reveal .f-text strong {
+  display: block; font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px;
+}
+#food-reveal .f-text p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+#s6 { background: var(--surface); }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+  margin-top: 48px;
+}
+@media(max-width:700px) { .stats-grid { grid-template-columns: 1fr; } }
+.stat-cell {
+  padding: 40px 36px; border-right: 1px solid var(--border);
+  background: var(--bg);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-ico  { font-size: 32px; margin-bottom: 20px; }
+.stat-num  {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--red);
+  line-height: 1; margin-bottom: 10px;
+}
+.stat-label { font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+.stat-sub   { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.ua-note {
+  margin-top: 24px; padding: 18px 24px;
+  border-radius: 10px; display: flex; align-items: center; gap: 14px;
+  background: var(--red-dim); border: 1px solid rgba(204,31,38,0.25);
+  font-size: 14px; color: var(--text); line-height: 1.6;
+}
+
+#s7 { background: var(--bg); }
+.facts-list { display: flex; flex-direction: column; gap: 40px; max-width: 680px; }
+.fact-row { display: flex; gap: 28px; align-items: flex-start; }
+.fact-num {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(3rem, 5vw, 4.5rem); color: var(--red);
+  line-height: 0.9; flex-shrink: 0; width: 64px;
+}
+.fact-body { padding-top: 4px; }
+.fact-body strong { display: block; font-size: 17px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.fact-body p      { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+#s8 { background: var(--surface); }
+.quiz-wrap { max-width: 620px; margin: 0 auto; }
+#q-progress {
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  color: var(--red); margin-bottom: 16px;
+}
+#q-text {
+  font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--text); margin-bottom: 32px; line-height: 1.3;
+}
+.q-opts { display: flex; flex-direction: column; gap: 10px; }
+.q-btn {
+  padding: 16px 20px; border-radius: 10px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 15px; text-align: left; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.q-btn:hover:not(:disabled) { border-color: var(--red); background: var(--surface); }
+.q-btn.correct { background: #14532d; border-color: #22c55e; color: #fff; }
+.q-btn.wrong   { background: #450a0a; border-color: #ef4444; color: #fff; }
+.q-btn:disabled { cursor: default; }
+
+#quiz-result { text-align: center; display: none; padding: 40px 0; }
+#res-emoji { font-size: 64px; margin-bottom: 20px; }
+#res-title {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--text); margin-bottom: 10px;
+}
+#res-text { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+#modal-bg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.72); z-index: 9000;
+  align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fade-in 0.18s ease;
+}
+#modal-bg.show { display: flex; }
+
+@keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+#modal-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+  width: 100%; max-width: 640px;
+  animation: slide-up 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes slide-up {
+  from { transform: translateY(20px) scale(0.97); opacity:0; }
+  to   { transform: none; opacity: 1; }
+}
+#modal-body { padding: 32px; }
+#modal-img  { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; margin: 20px 0; display: block; }
+#modal-text { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+#modal-fact {
+  padding: 16px 20px; border-radius: 10px;
+  background: var(--red-dim); border: 1px solid rgba(204,31,38,0.22);
+}
+#modal-fact .lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+#modal-fact p { font-size: 14px; color: var(--text); line-height: 1.6; }
+#modal-footer {
+  padding: 16px 32px; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end;
+}
+
+.cpiece {
+  position: fixed; top: -10px; pointer-events: none; z-index: 99999;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(700deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <a class="logo" href="#">БЕРЛІН</a>
+  <div id="dots"></div>
+  <div id="hdr-right">
+    <button id="theme-btn" class="btn-sm" onclick="toggleTheme()" title="Змінити тему">🌙</button>
+    <button class="btn-sm" onclick="prevSlide()">←</button>
+    <div id="slide-count"><strong>1</strong>/8</div>
+    <button class="btn-sm btn-primary" onclick="nextSlide()">→</button>
+  </div>
+</header>
+<div id="viewport">
+  <section class="slide" id="s1">
+    <div class="max-w">
+      <div class="hero-grid">
+        <div>
+          <p class="label">● Живе серце Європи</p>
+          <h1 class="h-xl">БЕР<br>ЛІН</h1>
+          <p style="font-size:1.2rem; color:var(--muted); max-width:440px; line-height:1.6; margin-top:20px">
+            Місто, яке зруйнували, розділили і зібрали знову — і воно стало найвільнішим на планеті.
+          </p>
+          <div class="hero-stats">
+            <span>🌍 3,8 млн жителів</span>
+            <span>🧱 1989 — падіння стіни</span>
+            <span>🍺 300+ пивних садів</span>
+          </div>
+          <div class="hero-cta">
+            <button class="btn-lg" onclick="nextSlide()">
+              Почати подорож <span>→</span>
+            </button>
+            <button class="btn-confetti" onclick="triggerConfetti()">🎉 Конфеті</button>
+          </div>
+        </div>
+
+        <div class="hero-img-wrap">
+          <div class="hero-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg"
+                 alt="Бранденбурзькі ворота вночі">
+            <div class="hero-img-overlay"></div>
+            <div class="hero-img-badge">
+              <div class="ping"></div> Berlin, 2026
+            </div>
+            <div class="hero-img-caption">
+              <div class="tag">Бранденбурзькі ворота</div>
+              <div style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:#fff; line-height:1.2">
+                Ніч. Ворота.<br>Свобода.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>прокрути вниз</span>
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    </div>
+  </section>
+  <section class="slide" id="s2">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <p class="label">Хронологія</p>
+      <h2 class="h-lg" style="max-width:560px; margin-bottom:48px">
+        7 моментів, що<br>визначили місто
+      </h2>
+      <div id="tl-list"></div>
+      <p style="margin-top:24px; font-size:13px; color:var(--muted)">
+        Натисни на рядок — відкриються деталі
+      </p>
+    </div>
+  </section>
+  <section class="slide" id="s3">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:36px">
+        <div>
+          <p class="label">Визначні місця</p>
+          <h2 class="h-lg">Найвідоміші<br>пам'ятки</h2>
+        </div>
+        <p style="font-size:13px; color:var(--muted); max-width:220px; text-align:right">
+          Клікни на картку — відкриються деталі та цікавинка
+        </p>
+      </div>
+      <div class="landmark-grid">
+        <div class="lm-card" onclick="showLandmark(0)">
+          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg')"></div>
+          <div class="lm-info">
+            <h3>Бранденбурзькі ворота</h3>
+            <p>Символ єдності та свободи</p>
+          </div>
+        </div>
+        <div class="lm-card" onclick="showLandmark(1)">
+          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Reichstag_building_2020.jpg/1200px-Reichstag_building_2020.jpg')"></div>
+          <div class="lm-info">
+            <h3>Рейхстаг</h3>
+            <p>Скляний купол демократії</p>
+          </div>
+        </div>
+        <div class="lm-card" onclick="showLandmark(2)">
+          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/East_Side_Gallery_2018.jpg/1200px-East_Side_Gallery_2018.jpg')"></div>
+          <div class="lm-info">
+            <h3>East Side Gallery</h3>
+            <p>1,3 км живої стіни</p>
+          </div>
+        </div>
+        <div class="lm-card" onclick="showLandmark(3)">
+          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Berlin_Fernsehturm.jpg/1200px-Berlin_Fernsehturm.jpg')"></div>
+          <div class="lm-info">
+            <h3>Телевежа</h3>
+            <p>368 м над Берліном</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" id="s4">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <div class="culture-grid">
+        <div>
+          <p class="label">Культура</p>
+          <h2 class="h-lg">Столиця<br>мистецтва</h2>
+          <p style="font-size:1.1rem; color:var(--muted); margin-top:16px; line-height:1.65; max-width:400px">
+            170+ музеїв, 300 галерей, 150 театрів. Берлін диктує тренди — від техно до сучасного мистецтва.
+          </p>
+          <div class="culture-list">
+            <div class="culture-row">
+              <span class="ico">🖼️</span>
+              <div class="info">
+                <strong>Музейний острів</strong>
+                <span>Об'єкт ЮНЕСКО, 5 музеїв на одному острові</span>
+              </div>
+            </div>
+            <div class="culture-row">
+              <span class="ico">🎭</span>
+              <div class="info">
+                <strong>Берлінале</strong>
+                <span>Один з найпрестижніших кінофестивалів світу</span>
+              </div>
+            </div>
+            <div class="culture-row">
+              <span class="ico">🎶</span>
+              <div class="info">
+                <strong>Techno Capital</strong>
+                <span>Berghain, Tresor, Watergate — клуби 24/7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <div class="quote-mark">"</div>
+          <div id="quote-text"></div>
+          <div id="quote-author"></div>
+          <button class="btn-quote" onclick="nextQuote()">Наступна цитата →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" id="s5">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <div style="text-align:center; margin-bottom:48px">
+        <p class="label">Їжа</p>
+        <h2 class="h-lg">Берлінська кухня</h2>
+        <p style="font-size:14px; color:var(--muted); margin-top:12px">Клікни на страву — дізнайся секрет</p>
+      </div>
+      <div class="food-grid">
+        <div class="food-card" onclick="showFood(0)">
+          <div class="food-emoji">🌭</div>
+          <div class="food-name">Currywurst</div>
+          <div class="food-tag">Винайдено 1949 р.</div>
+          <div class="food-desc">Сосиска з томатним каррі-соусом і хрустким картопляним фрі</div>
+        </div>
+        <div class="food-card" onclick="showFood(1)">
+          <div class="food-emoji">🥙</div>
+          <div class="food-name">Döner Kebab</div>
+          <div class="food-tag">Турецький подарунок</div>
+          <div class="food-desc">Народився у Берліні в 1971 році і завоював весь світ</div>
+        </div>
+        <div class="food-card" onclick="showFood(2)">
+          <div class="food-emoji">🍺</div>
+          <div class="food-name">Berliner Weisse</div>
+          <div class="food-tag">300+ пивних садів</div>
+          <div class="food-desc">Кисле пшеничне пиво з малиновим або лісовим сиропом</div>
+        </div>
+      </div>
+      <div id="food-reveal" style="display:none">
+        <div id="food-reveal-inner" style="display:flex; gap:16px; align-items:flex-start; max-width:640px; margin:0 auto; padding:24px 28px; border-radius:12px; background:var(--card); border:1px solid var(--border)"></div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" id="s6">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <p class="label">Сьогодні</p>
+      <h2 class="h-lg">Берлін 2026</h2>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-ico">🚀</div>
+          <div class="stat-num">3 000+</div>
+          <div class="stat-label">Стартапів</div>
+          <div class="stat-sub">«Silicon Allee» — tech-хаб Європи з найбільшою венчурною активністю</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-ico">🌳</div>
+          <div class="stat-num">40%</div>
+          <div class="stat-label">Зелень</div>
+          <div class="stat-sub">Парки, ліси та озера займають майже половину площі міста</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-ico">🌍</div>
+          <div class="stat-num">190</div>
+          <div class="stat-label">Національностей</div>
+          <div class="stat-sub">Найбільш мультикультурне місто Євросоюзу за складом населення</div>
+        </div>
+      </div>
+      <div class="ua-note">
+        <span style="font-size:24px">🇺🇦</span>
+        <p>У Берліні живе близько <strong>100 000 українців</strong> — одна з найбільших українських діаспор у Європі.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s7">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <p class="label">Ти цього не знав</p>
+      <h2 class="h-lg" style="margin-bottom:52px">5 неймовірних<br>фактів</h2>
+      <div class="facts-list">
+        <div class="fact-row">
+          <div class="fact-num">01</div>
+          <div class="fact-body">
+            <strong>Більше мостів, ніж у Венеції</strong>
+            <p>У Берліні понад 1 700 мостів — утричі більше, ніж в Амстердамі. Місто стоїть на 10 річках і каналах.</p>
+          </div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-num">02</div>
+          <div class="fact-body">
+            <strong>Аеропорт став парком</strong>
+            <p>Темпельхоф — колишній аеропорт часів Другої Світової, тепер найбільший громадський парк Берліна площею 355 га.</p>
+          </div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-num">03</div>
+          <div class="fact-body">
+            <strong>Найглибший басейн у світі</strong>
+            <p>Deep Spot у Мщонові (поблизу Берліна) — 45 метрів глибини. Для дайверів з усього світу.</p>
+          </div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-num">04</div>
+          <div class="fact-body">
+            <strong>Зоопарк №1 на планеті</strong>
+            <p>Берлінський зоопарк — найбагатший за різноманітністю: 1 200 видів, понад 20 000 тварин.</p>
+          </div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-num">05</div>
+          <div class="fact-body">
+            <strong>Love Parade народився тут</strong>
+            <p>У 1989 році, в день падіння стіни, перший Love Parade зібрав 150 людей. Згодом — мільйон щороку.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="slide" id="s8">
+    <div class="max-w" style="padding-top:80px; padding-bottom:60px">
+      <div class="quiz-wrap">
+        <p class="label">Квіз</p>
+        <h2 class="h-md" style="margin-bottom:8px">Наскільки добре ти знаєш Берлін?</h2>
+        <p style="font-size:14px; color:var(--muted); margin-bottom:36px">4 питання — відповідай</p>
+
+        <div id="quiz-container">
+          <div id="q-progress"></div>
+          <div id="q-text"></div>
+          <div class="q-opts" id="q-opts"></div>
+        </div>
+
+        <div id="quiz-result">
+          <div id="res-emoji"></div>
+          <div id="res-title"></div>
+          <div id="res-text"></div>
+          <button class="btn-lg" style="margin:0 auto" onclick="startQuiz()">
+            Пройти ще раз ↺
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div id="modal-box">
+    <div id="modal-body"></div>
+    <div id="modal-footer">
+      <button class="btn-sm" onclick="closeModal()">Закрити ✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TL = [
+  { year:'1237', title:'Перша згадка', icon:'🏛️',
+    detail:'Берлін вперше згаданий у латинських документах як невелике торгівельне поселення на річці Шпрее.' },
+  { year:'1701', title:'Столиця Пруссії', icon:'👑',
+    detail:'Фрідріх I проголошує себе Прусським Королем. Берлін стає столицею нового Королівство.' },
+  { year:'1871', title:'Центр Імперії', icon:'🦅',
+    detail:'Після об\'єднання Бісмарком Берлін стає столицею Германської Імперії — найбільшої держави Європи.' },
+  { year:'1945', title:'Місто в руїнах', icon:'💥',
+    detail:'Після Другої Світової 80% Берліна зруйновано. 4 союзницькі зони ділять місто на частини.' },
+  { year:'1961', title:'Берлінська стіна', icon:'🧱',
+    detail:'13 серпня за одну ніч НДР зводить стіну — 155 км бетону і дроту. Місто розрізане навпіл на 28 років.' },
+  { year:'1989', title:'Стіна падає', icon:'🎉',
+    detail:'9 листопада 1989 — стіна відкрита. Тисячі берлінців зустрічаються вперше за майже три десятиліття.' },
+  { year:'1990', title:'Єдина столиця', icon:'🇩🇪',
+    detail:'3 жовтня 1990 Берлін стає офіційною столицею об\'єднаної Федеративної Республіки Німеччина.' },
+]
+
+const LANDMARKS = [
+  {
+    title:'Бранденбурзькі ворота', icon:'🦅',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg',
+    text:'Збудовані 1791 року. Символ Берліна і об\'єднання Німеччини. Тут відбувалися найважливіші події ХХ ст. Вночі підсвічені — виглядають неймовірно.',
+    fact:'Ширина воріт — 65,5 метрів. Свого часу тут стояли справжні міські ворота з митним пунктом.'
+  },
+  {
+    title:'Рейхстаг', icon:'🏛️',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Reichstag_building_2020.jpg/1200px-Reichstag_building_2020.jpg',
+    text:'Сучасний парламент Німеччини зі знаменитим скляним куполом від Нормана Фостера (1999). З купола відкривається панорама на весь Берлін.',
+    fact:'Купол відкритий для відвідувачів безкоштовно — достатньо зареєструватися онлайн за 2 тижні.'
+  },
+  {
+    title:'East Side Gallery', icon:'🎨',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/East_Side_Gallery_2018.jpg/1200px-East_Side_Gallery_2018.jpg',
+    text:'Найдовший збережений відрізок Берлінської стіни — 1,3 км. 118 художників з усього світу розмалювали її в 1990 році. Офіційний пам\'ятник.',
+    fact:'Найвідоміший мурал — «Братній поцілунок» Брежнєва і Хонеккера пензля Дмитра Вруб\'єля.'
+  },
+  {
+    title:'Телевежа (Fernsehturm)', icon:'📡',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Berlin_Fernsehturm.jpg/1200px-Berlin_Fernsehturm.jpg',
+    text:'Висота 368 метрів — найвища споруда Німеччини. На 203-му метрі — оглядовий майданчик і ресторан, що робить повний оберт за 30 хвилин.',
+    fact:'У сонячну погоду хрест-відблиск на кулі берлінці жартома називають «помстою Папи Римського» — вежу будувала атеїстична НДР.'
+  },
+]
+
+const QUOTES = [
+  { text:'Берлін — місто, яке постійно змінюється, але завжди залишається собою.', author:'Девід Бові' },
+  { text:'Берлін завжди стає тим, чим він ніколи не є.', author:'Карл Шефлер, 1910' },
+  { text:'Якщо ти не був у Берліні — ти не знаєш, що таке справжня свобода.', author:'Ігор Левіт' },
+]
+
+const FOOD = [
+  {
+    emoji:'🌭', name:'Currywurst',
+    secret:'Найкращий у місті — Konnopke\'s Imbiss під станцією Eberswalder Str. Точка існує з 1930 р. і пережила дві світові війни та поділ міста.'
+  },
+  {
+    emoji:'🥙', name:'Döner Kebab',
+    secret:'Щороку берлінці з\'їдають понад 400 мільйонів донерів. Вперше його продали в 1971 році на ринку Türkische Markt.'
+  },
+  {
+    emoji:'🍺', name:'Berliner Weisse',
+    secret:'Наполеон називав це пиво «Шампанським Півночі». Подається з малиновим або ялинковим сиропом — без нього занадто кисле.'
+  },
+]
+
+const QUIZ = [
+  { q:'Коли впала Берлінська стіна?',
+    opts:['9 листопада 1989','3 жовтня 1991','13 серпня 1975','1 вересня 1969'], ok:0 },
+  { q:'Хто першим приготував Döner Kebab у Берліні?',
+    opts:['Кемаль Камачан, 1971','Французький кухар, 1965','Прусський шеф, 1920','Грецький кухар, 1980'], ok:0 },
+  { q:'Скільки мостів у Берліні?',
+    opts:['Понад 1 700','Близько 800','Приблизно 300','Майже 2 500'], ok:0 },
+  { q:'Яка висота Берлінської телевежі?',
+    opts:['368 метрів','250 метрів','420 метрів','185 метрів'], ok:0 },
+]
+let curSlide   = 0
+let curQuote   = 0
+let openTL     = -1
+let isDark     = true
+let qIdx       = 0
+let qScore     = 0
+const TOTAL    = 8
+function buildDots() {
+  const el = document.getElementById('dots')
+  el.innerHTML = ''
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('button')
+    d.className = 'dot' + (i === curSlide ? ' on' : '')
+    d.setAttribute('aria-label', `Слайд ${i+1}`)
+    d.onclick = () => goTo(i)
+    el.appendChild(d)
+  }
+  document.getElementById('slide-count').innerHTML =
+    `<strong>${curSlide + 1}</strong>/${TOTAL}`
+}
+
+function goTo(i) {
+  curSlide = ((i % TOTAL) + TOTAL) % TOTAL
+  const el = document.getElementById(`s${curSlide + 1}`)
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' })
+  buildDots()
+}
+
+function nextSlide() { goTo(curSlide + 1) }
+function prevSlide() { goTo(curSlide - 1) }
+
+function initObserver() {
+  const vp = document.getElementById('viewport')
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+        const idx = parseInt(e.target.id.replace('s','')) - 1
+        if (!isNaN(idx) && idx !== curSlide) {
+          curSlide = idx
+          buildDots()
+        }
+      }
+    })
+  }, { threshold: 0.5, root: vp })
+  for (let i = 1; i <= TOTAL; i++) {
+    const el = document.getElementById(`s${i}`)
+    if (el) observer.observe(el)
+  }
+}
+function toggleTheme() {
+  isDark = !isDark
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️'
+}
+function buildTimeline() {
+  const el = document.getElementById('tl-list')
+  el.innerHTML = TL.map((item, i) => `
+    <div class="tl-item" onclick="toggleTL(${i})">
+      <div class="tl-header">
+        <span class="tl-icon">${item.icon}</span>
+        <span class="tl-year">${item.year}</span>
+        <span class="tl-title">${item.title}</span>
+        <span class="tl-arrow" id="tl-arr-${i}">+</span>
+      </div>
+      <div class="tl-detail" id="tl-det-${i}">${item.detail}</div>
+    </div>
+  `).join('')
+}
+
+function toggleTL(i) {
+  if (openTL === i) {
+    document.getElementById(`tl-det-${i}`).classList.remove('open')
+    document.getElementById(`tl-arr-${i}`).classList.remove('open')
+    openTL = -1
+    return
+  }
+  if (openTL >= 0) {
+    document.getElementById(`tl-det-${openTL}`).classList.remove('open')
+    document.getElementById(`tl-arr-${openTL}`).classList.remove('open')
+  }
+  document.getElementById(`tl-det-${i}`).classList.add('open')
+  document.getElementById(`tl-arr-${i}`).classList.add('open')
+  openTL = i
+}
+function showLandmark(i) {
+  const d = LANDMARKS[i]
+  document.getElementById('modal-body').innerHTML = `
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px">
+      <span style="font-size:32px">${d.icon}</span>
+      <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.6rem; color:var(--text)">${d.title}</h3>
+    </div>
+    <img id="modal-img" src="${d.img}" alt="${d.title}">
+    <p id="modal-text">${d.text}</p>
+    <div id="modal-fact">
+      <div class="lbl">Цікавинка</div>
+      <p>${d.fact}</p>
+    </div>
+  `
+  const bg = document.getElementById('modal-bg')
+  bg.classList.add('show')
+}
+
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('show')
+}
+function renderQuote() {
+  const q = QUOTES[curQuote]
+  document.getElementById('quote-text').textContent   = q.text
+  document.getElementById('quote-author').textContent = '— ' + q.author
+}
+
+function nextQuote() {
+  curQuote = (curQuote + 1) % QUOTES.length
+  renderQuote()
+}
+function showFood(i) {
+  const f = FOOD[i]
+  const wrap  = document.getElementById('food-reveal')
+  const inner = document.getElementById('food-reveal-inner')
+  inner.innerHTML = `
+    <span style="font-size:36px; flex-shrink:0">${f.emoji}</span>
+    <div>
+      <strong style="display:block; font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px">${f.name}</strong>
+      <p style="font-size:14px; color:var(--muted); line-height:1.65">${f.secret}</p>
+    </div>
+  `
+  wrap.style.display = 'block'
+  wrap.scrollIntoView({ behavior:'smooth', block:'nearest' })
+}
+function startQuiz() {
+  qIdx = 0; qScore = 0
+  document.getElementById('quiz-result').style.display  = 'none'
+  document.getElementById('quiz-container').style.display = 'block'
+  renderQ()
+}
+
+function renderQ() {
+  const q = QUIZ[qIdx]
+  document.getElementById('q-progress').textContent = `Питання ${qIdx + 1} / ${QUIZ.length}`
+  document.getElementById('q-text').textContent = q.q
+  document.getElementById('q-opts').innerHTML = q.opts.map((opt, i) => `
+    <button class="q-btn" id="qb${i}" onclick="answerQ(${i})">${opt}</button>
+  `).join('')
+}
+
+function answerQ(sel) {
+  const ok   = QUIZ[qIdx].ok
+  const btns = document.querySelectorAll('.q-btn')
+  btns.forEach(b => b.disabled = true)
+  document.getElementById(`qb${sel}`).classList.add(sel === ok ? 'correct' : 'wrong')
+  if (sel !== ok) document.getElementById(`qb${ok}`).classList.add('correct')
+  if (sel === ok) qScore++
+  setTimeout(() => {
+    qIdx++
+    qIdx >= QUIZ.length ? showResult() : renderQ()
+  }, 900)
+}
+
+function showResult() {
+  document.getElementById('quiz-container').style.display = 'none'
+  const res = document.getElementById('quiz-result')
+  res.style.display = 'block'
+  const pct = Math.round((qScore / QUIZ.length) * 100)
+  let emoji, title, text
+  if (pct === 100) {
+    emoji='🏆'; title='Ти справжній берлінець!'; text='Ідеальний результат. Збирай валізи — місто чекає.'
+  } else if (pct >= 75) {
+    emoji='🌟'; title='Дуже добре!'; text=`${qScore} з ${QUIZ.length}. Знаєш Берлін краще за більшість туристів.`
+  } else if (pct >= 50) {
+    emoji='✈️'; title='Непогано!'; text='Ще трохи — і готовий до подорожі. Берлін чекає!'
+  } else {
+    emoji='📚'; title='Є куди рости!'; text='Найкраще вивчати місто особисто. Побачимось у Берліні!'
+  }
+  document.getElementById('res-emoji').textContent = emoji
+  document.getElementById('res-title').textContent = title
+  document.getElementById('res-text').textContent  = text
+}
+function triggerConfetti() {
+  const colors = ['#cc1f26','#f5c518','#3b82f6','#f0ede8','#22c55e','#f97316']
+  for (let i = 0; i < 110; i++) {
+    const el   = document.createElement('div')
+    const size = 5 + Math.random() * 9
+    el.className = 'cpiece'
+    el.style.cssText = `
+      left: ${Math.random() * 100}vw;
+      width: ${size}px; height: ${size}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: ${Math.random() > 0.4 ? '50%' : '2px'};
+      animation-duration: ${2.5 + Math.random() * 2.5}s;
+      animation-delay: ${Math.random() * 0.6}s;
+    `
+    document.body.appendChild(el)
+    setTimeout(() => el.remove(), 5500)
+  }
+}
+document.addEventListener('keydown', e => {
+  if (['ArrowRight','ArrowDown'].includes(e.key)) nextSlide()
+  if (['ArrowLeft','ArrowUp'].includes(e.key))    prevSlide()
+  if (e.key === 'Escape') closeModal()
+})
+
+window.addEventListener('load', () => {
+  buildDots()
+  buildTimeline()
+  renderQuote()
+  startQuiz()
+  initObserver()
+})
+</script>
+</body>
+</html>
