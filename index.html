@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --bg:       #0e0e0e;
   --surface:  #181818;
@@ -454,6 +455,7 @@ body {
   font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--text); margin-bottom: 10px;
 }
 #res-text { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+
 #modal-bg {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.72); z-index: 9000;
@@ -512,7 +514,9 @@ body {
     <button class="btn-sm btn-primary" onclick="nextSlide()">→</button>
   </div>
 </header>
+
 <div id="viewport">
+
   <section class="slide" id="s1">
     <div class="max-w">
       <div class="hero-grid">
@@ -537,7 +541,7 @@ body {
 
         <div class="hero-img-wrap">
           <div class="hero-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg"
+            <img src="gate.jpg"
                  alt="Бранденбурзькі ворота вночі">
             <div class="hero-img-overlay"></div>
             <div class="hero-img-badge">
@@ -559,6 +563,8 @@ body {
       <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
     </div>
   </section>
+
+  <!-- ── SLIDE 2 TIMELINE ──────────────────────────────────── -->
   <section class="slide" id="s2">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <p class="label">Хронологія</p>
@@ -571,6 +577,8 @@ body {
       </p>
     </div>
   </section>
+
+  <!-- ── SLIDE 3 LANDMARKS ────────────────────────────────── -->
   <section class="slide" id="s3">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:36px">
@@ -584,28 +592,28 @@ body {
       </div>
       <div class="landmark-grid">
         <div class="lm-card" onclick="showLandmark(0)">
-          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg')"></div>
+          <div class="lm-img" style="background-image:url('gate.jpg')"></div>
           <div class="lm-info">
             <h3>Бранденбурзькі ворота</h3>
             <p>Символ єдності та свободи</p>
           </div>
         </div>
         <div class="lm-card" onclick="showLandmark(1)">
-          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Reichstag_building_2020.jpg/1200px-Reichstag_building_2020.jpg')"></div>
+          <div class="lm-img" style="background-image:url('reichstag.jpg')"></div>
           <div class="lm-info">
             <h3>Рейхстаг</h3>
             <p>Скляний купол демократії</p>
           </div>
         </div>
         <div class="lm-card" onclick="showLandmark(2)">
-          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/East_Side_Gallery_2018.jpg/1200px-East_Side_Gallery_2018.jpg')"></div>
+          <div class="lm-img" style="background-image:url('gallery.jpg')"></div>
           <div class="lm-info">
             <h3>East Side Gallery</h3>
             <p>1,3 км живої стіни</p>
           </div>
         </div>
         <div class="lm-card" onclick="showLandmark(3)">
-          <div class="lm-img" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Berlin_Fernsehturm.jpg/1200px-Berlin_Fernsehturm.jpg')"></div>
+          <div class="lm-img" style="background-image:url('tower.jpg')"></div>
           <div class="lm-info">
             <h3>Телевежа</h3>
             <p>368 м над Берліном</p>
@@ -614,6 +622,8 @@ body {
       </div>
     </div>
   </section>
+
+  <!-- ── SLIDE 4 CULTURE ──────────────────────────────────── -->
   <section class="slide" id="s4">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <div class="culture-grid">
@@ -657,6 +667,8 @@ body {
       </div>
     </div>
   </section>
+
+  <!-- ── SLIDE 5 FOOD ──────────────────────────────────────── -->
   <section class="slide" id="s5">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <div style="text-align:center; margin-bottom:48px">
@@ -689,6 +701,8 @@ body {
       </div>
     </div>
   </section>
+
+  <!-- ── SLIDE 6 MODERN ────────────────────────────────────── -->
   <section class="slide" id="s6">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <p class="label">Сьогодні</p>
@@ -720,6 +734,7 @@ body {
     </div>
   </section>
 
+  <!-- ── SLIDE 7 FACTS ─────────────────────────────────────── -->
   <section class="slide" id="s7">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <p class="label">Ти цього не знав</p>
@@ -763,6 +778,8 @@ body {
       </div>
     </div>
   </section>
+
+  <!-- ── SLIDE 8 QUIZ ──────────────────────────────────────── -->
   <section class="slide" id="s8">
     <div class="max-w" style="padding-top:80px; padding-bottom:60px">
       <div class="quiz-wrap">
@@ -788,7 +805,9 @@ body {
     </div>
   </section>
 
-</div>
+</div><!-- /viewport -->
+
+<!-- MODAL -->
 <div id="modal-bg" onclick="if(event.target===this)closeModal()">
   <div id="modal-box">
     <div id="modal-body"></div>
@@ -799,6 +818,7 @@ body {
 </div>
 
 <script>
+
 const TL = [
   { year:'1237', title:'Перша згадка', icon:'🏛️',
     detail:'Берлін вперше згаданий у латинських документах як невелике торгівельне поселення на річці Шпрее.' },
@@ -819,25 +839,25 @@ const TL = [
 const LANDMARKS = [
   {
     title:'Бранденбурзькі ворота', icon:'🦅',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Brandenburg_Gate_at_night_%28cropped%29.jpg/1200px-Brandenburg_Gate_at_night_%28cropped%29.jpg',
+    img:'gate.jpg',
     text:'Збудовані 1791 року. Символ Берліна і об\'єднання Німеччини. Тут відбувалися найважливіші події ХХ ст. Вночі підсвічені — виглядають неймовірно.',
     fact:'Ширина воріт — 65,5 метрів. Свого часу тут стояли справжні міські ворота з митним пунктом.'
   },
   {
     title:'Рейхстаг', icon:'🏛️',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Reichstag_building_2020.jpg/1200px-Reichstag_building_2020.jpg',
+    img:'reichstag.jpg',
     text:'Сучасний парламент Німеччини зі знаменитим скляним куполом від Нормана Фостера (1999). З купола відкривається панорама на весь Берлін.',
     fact:'Купол відкритий для відвідувачів безкоштовно — достатньо зареєструватися онлайн за 2 тижні.'
   },
   {
     title:'East Side Gallery', icon:'🎨',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/East_Side_Gallery_2018.jpg/1200px-East_Side_Gallery_2018.jpg',
+    img:'gallery.jpg',
     text:'Найдовший збережений відрізок Берлінської стіни — 1,3 км. 118 художників з усього світу розмалювали її в 1990 році. Офіційний пам\'ятник.',
     fact:'Найвідоміший мурал — «Братній поцілунок» Брежнєва і Хонеккера пензля Дмитра Вруб\'єля.'
   },
   {
     title:'Телевежа (Fernsehturm)', icon:'📡',
-    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Berlin_Fernsehturm.jpg/1200px-Berlin_Fernsehturm.jpg',
+    img:'tower.jpg',
     text:'Висота 368 метрів — найвища споруда Німеччини. На 203-му метрі — оглядовий майданчик і ресторан, що робить повний оберт за 30 хвилин.',
     fact:'У сонячну погоду хрест-відблиск на кулі берлінці жартома називають «помстою Папи Римського» — вежу будувала атеїстична НДР.'
   },
@@ -874,6 +894,7 @@ const QUIZ = [
   { q:'Яка висота Берлінської телевежі?',
     opts:['368 метрів','250 метрів','420 метрів','185 метрів'], ok:0 },
 ]
+
 let curSlide   = 0
 let curQuote   = 0
 let openTL     = -1
@@ -881,6 +902,7 @@ let isDark     = true
 let qIdx       = 0
 let qScore     = 0
 const TOTAL    = 8
+
 function buildDots() {
   const el = document.getElementById('dots')
   el.innerHTML = ''
@@ -923,11 +945,13 @@ function initObserver() {
     if (el) observer.observe(el)
   }
 }
+
 function toggleTheme() {
   isDark = !isDark
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
   document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️'
 }
+
 function buildTimeline() {
   const el = document.getElementById('tl-list')
   el.innerHTML = TL.map((item, i) => `
@@ -958,6 +982,7 @@ function toggleTL(i) {
   document.getElementById(`tl-arr-${i}`).classList.add('open')
   openTL = i
 }
+
 function showLandmark(i) {
   const d = LANDMARKS[i]
   document.getElementById('modal-body').innerHTML = `
@@ -979,6 +1004,7 @@ function showLandmark(i) {
 function closeModal() {
   document.getElementById('modal-bg').classList.remove('show')
 }
+
 function renderQuote() {
   const q = QUOTES[curQuote]
   document.getElementById('quote-text').textContent   = q.text
@@ -989,6 +1015,7 @@ function nextQuote() {
   curQuote = (curQuote + 1) % QUOTES.length
   renderQuote()
 }
+
 function showFood(i) {
   const f = FOOD[i]
   const wrap  = document.getElementById('food-reveal')
@@ -1003,6 +1030,7 @@ function showFood(i) {
   wrap.style.display = 'block'
   wrap.scrollIntoView({ behavior:'smooth', block:'nearest' })
 }
+
 function startQuiz() {
   qIdx = 0; qScore = 0
   document.getElementById('quiz-result').style.display  = 'none'
@@ -1051,6 +1079,7 @@ function showResult() {
   document.getElementById('res-title').textContent = title
   document.getElementById('res-text').textContent  = text
 }
+
 function triggerConfetti() {
   const colors = ['#cc1f26','#f5c518','#3b82f6','#f0ede8','#22c55e','#f97316']
   for (let i = 0; i < 110; i++) {
@@ -1069,6 +1098,7 @@ function triggerConfetti() {
     setTimeout(() => el.remove(), 5500)
   }
 }
+
 document.addEventListener('keydown', e => {
   if (['ArrowRight','ArrowDown'].includes(e.key)) nextSlide()
   if (['ArrowLeft','ArrowUp'].includes(e.key))    prevSlide()
